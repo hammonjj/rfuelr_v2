@@ -2,11 +2,11 @@ import { MenuItem, Select, SelectChangeEvent } from "@mui/material";
 import useVehicles from "../hooks/useVehicles";
 import { useState } from "react";
 
-interface VehicleDropdownProps {
+//interface VehicleDropdownProps {
   //setVehicle: (vehicle: Vehicle) => void
-}
+//}
 
-export default function VehicleDropdown(props: VehicleDropdownProps) {
+export default function VehicleDropdown() {
   const { vehicles } = useVehicles();
   const [vehicle, setVehicle] = useState('');
 
