@@ -5,7 +5,8 @@ import { useState } from "react";
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import dayjs from 'dayjs';
-import { Vehicle } from "hooks/useVehicles";
+import { Vehicle } from "../hooks/useVehicles";
+import useRefuels from "../hooks/useRefuels";
 
 interface SubmitRefuelDialogProps {
   open: boolean;
@@ -13,6 +14,7 @@ interface SubmitRefuelDialogProps {
 }
 
 export default function SubmitRefuelDialog(props: SubmitRefuelDialogProps) {
+  const { addRefuel } = useRefuels();
   const [vehicle, setVehicle] = useState<Vehicle | null>();
   const [date, setDate] = useState<Date | null>(new Date());
   const [gallons, setGallons] = useState<number | null>(null);
@@ -21,7 +23,20 @@ export default function SubmitRefuelDialog(props: SubmitRefuelDialogProps) {
   const [pricePerGallon, setPricePerGallon] = useState<number | null>(null);
 
   function onSubmit() {
-    //Save Refuel Object
+    const tripMiles = omit ? 0 : odometer! - vehicle?.odometer!;
+    const milesPerGallon = omit ? 0 : (odometer! - vehicle?.odometer!) / gallons!;
+    
+    addRefuel({
+      vehicle: vehicle!,
+      date: date!,
+      gallons: gallons!,
+      odometer: odometer!,
+      omit: omit,
+      pricePerGallon: pricePerGallon!,
+      milesPerGallon: milesPerGallon,
+      tripMiles: tripMiles
+    });
+
     handleClose();
   }
 

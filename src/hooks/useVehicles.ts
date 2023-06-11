@@ -21,13 +21,27 @@ export default function useVehicles() {
     const queryClient = useQueryClient();
 
     const { data: vehicles, isLoading, error } = useQuery(
-        ['vehicles', user ? user?.id : ""], 
+        ['vehicles'], 
         getVehicles,
         { enabled: user !== null });
 
+    async function getVehicles(): Promise<Vehicle[]> {
+        const { data, error } = await supabase
+            .from('Refuel.Vehicles')
+            .select('make, model, id, odometer')
+            .eq('user', user!.id);
+    
+        if(error) {
+            console.log(error);
+            return [];
+        }
+    
+        return data as Vehicle[];
+    }
+
     const addVehicleMutation = useMutation(addVehicle, {
         onSuccess: (newVehicle) => {
-            queryClient.setQueryData(['vehicles', user ? user?.id : ""], (oldVehicles: Vehicle[] | undefined) => {
+            queryClient.setQueryData(['vehicles'], (oldVehicles: Vehicle[] | undefined) => {
                 return [...oldVehicles || [], newVehicle]
             });
         },
@@ -53,33 +67,47 @@ export default function useVehicles() {
 
     const deleteVehicleMutation = useMutation(deleteVehicle, {
         onSuccess: (deletedVehicleId) => {
-            queryClient.setQueryData(['vehicles', user ? user?.id : ""], (oldVehicles: Vehicle[] | undefined) => {
+            queryClient.setQueryData(['vehicles'], (oldVehicles: Vehicle[] | undefined) => {
                 return oldVehicles?.filter(vehicle => vehicle.id !== deletedVehicleId)
             });
         },
     });
+
+    const updateVehicleMutation = useMutation(updateVehicle, {
+        onSuccess: (updatedVehicle) => {
+            queryClient.setQueryData(['vehicles'], (oldVehicles: Vehicle[] | undefined) => {
+                return oldVehicles?.map(vehicle => {
+                    if(vehicle.id === updatedVehicle.id) {
+                        return updatedVehicle;
+                    }
+                    return vehicle;
+                })
+            });
+        },
+    });
+
+    async function updateVehicle(updatedVehicle: Vehicle) {
+        const { error } = await supabase
+            .from('Refuel.Vehicles')
+            .update({ make: updatedVehicle.make, model: updatedVehicle.model, odometer: updatedVehicle.odometer })
+            .eq('id', updatedVehicle.id);
+
+        if (error) {
+            console.log(error);
+            throw error;
+        }
+
+        return updatedVehicle;
+    }
 
     return { 
         vehicles, 
         isLoading, 
         error, 
         addVehicle: addVehicleMutation.mutate, 
-        deleteVehicle: deleteVehicleMutation.mutate 
+        deleteVehicle: deleteVehicleMutation.mutate,
+        updateVehicle: updateVehicleMutation.mutate, 
     };
-}
-
-async function getVehicles({ queryKey }: { queryKey: [string, string] }): Promise<Vehicle[]> {
-    const { data, error } = await supabase
-        .from('Refuel.Vehicles')
-        .select('make, model, id, odometer')
-        .eq('user', queryKey[1]);
-
-    if(error) {
-        console.log(error);
-        return [];
-    }
-
-    return data as Vehicle[];
 }
 
 async function deleteVehicle(vehicleId: string) {
