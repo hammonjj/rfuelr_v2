@@ -58,7 +58,7 @@ export default function Login() {
         >
           <Alert onClose={() => setToastOpen(false)} severity={toastType} sx={{ width: '100%' }}>
             {toastMessage}
-        </Alert>
+          </Alert>
         </Snackbar>
         <Container component="main" maxWidth="sm">
       <Box

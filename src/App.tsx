@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
 import './App.css'
 import { supabase } from './utils/supabaseClient';
 import { Session } from '@supabase/supabase-js';
 import Login from './pages/Login';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
-import CssBaseline from '@mui/material/CssBaseline';
+
 import LoggedInNavigationBar from './components/LoggedInNavigationBar';
 
 const queryClient = new QueryClient({
