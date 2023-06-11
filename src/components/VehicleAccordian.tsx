@@ -11,11 +11,12 @@ export default function VehicleAccordion() {
   const [confirmDeleteModalOpen, setConfirmDeleteModalOpen] = useState(false);
   const { vehicles, isLoading, addVehicle, deleteVehicle } = useVehicles();
 
-  function onVehicleSubmit(make: string, model: string) {
+  function onVehicleSubmit(make: string, model: string, odometer: number) {
     addVehicle({
       make: make,
       model: model,
-      id: undefined
+      id: undefined,
+      odometer: odometer,
     });
 
     setAddVehicleModalOpen(false);
@@ -45,6 +46,9 @@ export default function VehicleAccordion() {
               <AccordionDetails style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <Typography>
                   {vehicle.make + ' ' + vehicle.model}
+                </Typography>
+                <Typography>
+                  {vehicle.odometer}
                 </Typography>
                 <IconButton
                   aria-label="delete"

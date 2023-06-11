@@ -6,12 +6,14 @@ export interface Vehicle {
     make: string;
     model: string;
     id: string | undefined;
+    odometer: number;
 }
 
 interface NewVehicle {
     make: string;
     model: string;
     user: string;
+    odometer: number;
 }
 
 export default function useVehicles() {
@@ -37,7 +39,7 @@ export default function useVehicles() {
         const { data, error } = await supabase
             .from('Refuel.Vehicles')
             .insert(newVehicleObj)
-            .select('make, model, id')
+            .select('make, model, id, odometer')
             .limit(1)
             .single();
       
@@ -69,7 +71,7 @@ export default function useVehicles() {
 async function getVehicles({ queryKey }: { queryKey: [string, string] }): Promise<Vehicle[]> {
     const { data, error } = await supabase
         .from('Refuel.Vehicles')
-        .select('make, model, id')
+        .select('make, model, id, odometer')
         .eq('user', queryKey[1]);
 
     if(error) {

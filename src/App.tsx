@@ -7,7 +7,6 @@ import './App.css'
 import { supabase } from './utils/supabaseClient';
 import { Session } from '@supabase/supabase-js';
 import Login from './pages/Login';
-
 import LoggedInNavigationBar from './components/LoggedInNavigationBar';
 
 const queryClient = new QueryClient({

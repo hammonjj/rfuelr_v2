@@ -19,7 +19,7 @@ export default function LoggedInNavigationBar() {
       {value === 1 && <Data/>}
       {value === 2 && <Settings/>}
       
-      <SubmitRefuelDialog open={refuelOpen} handleClose={() => setRefuelOpen(false)} onSubmit={() => {}}/>
+      <SubmitRefuelDialog open={refuelOpen} handleClose={() => setRefuelOpen(false)}/>
       <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
         
         <Fab 

@@ -4,21 +4,23 @@ import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField } 
 interface AddVehicleModalProps {
   open: boolean;
   handleClose: () => void;
-  onSubmit: (make: string, model: string) => void;
+  onSubmit: (make: string, model: string, odometer: number) => void;
 }
 
 export default function AddVehicleModal(props: AddVehicleModalProps) {
   const [make, setMake] = useState('');
   const [model, setModel] = useState('');
+  const [odometer, setOdometer] = useState(0);
 
   function handleClose() {
     setMake('');
     setModel('');
+    setOdometer(0);
     props.handleClose();
   }
 
   function handleSubmit() {
-    props.onSubmit(make, model);
+    props.onSubmit(make, model, odometer);
     handleClose();
   }
 
@@ -55,12 +57,23 @@ export default function AddVehicleModal(props: AddVehicleModalProps) {
             setModel(e.target.value);
           }}
         />
+        <TextField
+          required
+          id="odometer"
+          label="Current Odometer"
+          inputMode="numeric"
+          type="number"
+          value={odometer || ""}
+          onChange={(event) => {
+            event.target.value === "" ? 
+              setOdometer(0) : setOdometer(parseInt(event.target.value))}}
+        />
       </DialogContent>
       <DialogActions>
         <Button onClick={handleClose}>Cancel</Button>
         <Button 
           onClick={handleSubmit} 
-          disabled={make === '' || model === ''}
+          disabled={make === '' || model === '' || odometer === 0}
         >
           Save
         </Button>
