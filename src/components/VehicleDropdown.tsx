@@ -1,5 +1,5 @@
-import { InputLabel, MenuItem, Select, SelectChangeEvent } from "@mui/material";
-import useVehicles, { Vehicle } from "../hooks/useVehicles";
+import { MenuItem, Select, SelectChangeEvent } from "@mui/material";
+import useVehicles from "../hooks/useVehicles";
 import { useState } from "react";
 
 interface VehicleDropdownProps {
@@ -7,7 +7,7 @@ interface VehicleDropdownProps {
 }
 
 export default function VehicleDropdown(props: VehicleDropdownProps) {
-  const { vehicles, isLoading } = useVehicles();
+  const { vehicles } = useVehicles();
   const [vehicle, setVehicle] = useState('');
 
   function handleChange(event: SelectChangeEvent) {

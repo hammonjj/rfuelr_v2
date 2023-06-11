@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Grid, Accordion, AccordionDetails, AccordionSummary, Typography, Switch } from "@mui/material";
+import { Accordion, AccordionDetails, AccordionSummary, Typography, Switch } from "@mui/material";
 
 export default function PreferencesAccordion() {
   const [expanded, setExpanded] = useState(false);
