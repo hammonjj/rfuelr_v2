@@ -19,3 +19,4 @@ This is a rewrite of the original Rfuelr iOS app to be a PWA instead of a React-
 - [ ] Add graphs to back of dashboard cards
 - [ ] Fix Typescript aliases (ex. "@hooks/useVehicles")
 - [ ] Add stepper for first time user setup
+- [ ] Add Rfuelr icon
