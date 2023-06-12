@@ -1,4 +1,4 @@
-# rfuelr_v2
+# Rfuelr
 ## Description
 This is a rewrite of the original Rfuelr iOS app to be a PWA instead of a React-Native app
 
