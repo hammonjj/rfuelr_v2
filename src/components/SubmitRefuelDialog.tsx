@@ -5,8 +5,8 @@ import { useState } from "react";
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import dayjs from 'dayjs';
-import { Vehicle } from "../hooks/useVehicles";
 import useRefuels from "../hooks/useRefuels";
+import { Vehicle } from "../utils/types";
 
 interface SubmitRefuelDialogProps {
   open: boolean;

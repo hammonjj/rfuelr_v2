@@ -1,6 +1,7 @@
 import { MenuItem, Select, SelectChangeEvent } from "@mui/material";
-import useVehicles, { Vehicle } from "../hooks/useVehicles";
+import useVehicles from "../hooks/useVehicles";
 import { useEffect, useState } from "react";
+import { Vehicle } from "../utils/types";
 
 interface VehicleDropdownProps {
   setVehicle: (vehicle: Vehicle) => void

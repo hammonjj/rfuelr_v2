@@ -1,29 +1,8 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import useUser from "./useUser";
-import useVehicles, { Vehicle } from "./useVehicles";
+import useVehicles from "./useVehicles";
 import { supabase } from "../utils/supabaseClient";
-
-export interface Refuel {
-  id: string;
-  date: Date;
-  vehicle: Vehicle;
-  pricePerGallon: number;
-  gallons: number;
-  omit: boolean;
-  tripMiles: number;
-  milesPerGallon: number;
-}
-
-export interface RefuelSubmission {
-  date: Date;
-  vehicle: Vehicle;
-  odometer: number;
-  milesPerGallon: number;
-  pricePerGallon: number;
-  gallons: number;
-  omit: boolean;
-  tripMiles: number;
-}
+import { Refuel, RefuelSubmission, Vehicle } from "../utils/types";
 
 export default function useRefuels() {
   const user = useUser();
@@ -114,7 +93,7 @@ export default function useRefuels() {
         vehicle!.odometer = vehicle!.odometer - refuels![0].tripMiles;
         updateVehicle(vehicle!);
       }
-      
+
       queryClient.setQueryData(['refuels'], (oldRefuels: Refuel[] | undefined) => {
         return oldRefuels?.filter(refuel => refuel.id !== deletedRefuelId)
       });

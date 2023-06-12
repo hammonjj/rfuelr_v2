@@ -1,11 +1,13 @@
 import React, { useState } from "react";
-import useVehicles, { Vehicle } from "../hooks/useVehicles";
+import useVehicles from "../hooks/useVehicles";
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
-import { Accordion, AccordionDetails, AccordionSummary, Button, IconButton, Typography } from "@mui/material";
 import AddVehicleModal from "./AddVehicleModal";
 import ConfirmDialog from "./ConfirmDialog";
 import EditVehicleModal from "./EditVehicleModal";
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { Accordion, AccordionDetails, AccordionSummary, Button, IconButton, Typography } from "@mui/material";
+import { Vehicle } from "../utils/types";
 
 export default function VehicleAccordion() {
   const [expanded, setExpanded] = useState(false);
@@ -30,8 +32,8 @@ export default function VehicleAccordion() {
     <>
       <EditVehicleModal open={editVehicleModalOpen} vehicle={editVehicle} handleClose={() => setEditVehicleModalOpen(false)} onSubmit={updateVehicle} />
       <AddVehicleModal open={addVehicleModalOpen} handleClose={() => setAddVehicleModalOpen(false)} onSubmit={onVehicleSubmit} />
-      <Accordion expanded={expanded} onChange={() => setExpanded(!expanded)}>
-        <AccordionSummary aria-controls="panel1d-content" id="vehicle-accordion">
+      <Accordion expanded={expanded} onChange={() => setExpanded(!expanded)} disableGutters={true}>
+        <AccordionSummary aria-controls="panel1d-content" id="vehicle-accordion" expandIcon={<ExpandMoreIcon />}>
           <Typography>Vehicles</Typography>
         </AccordionSummary>
         {isLoading ? (

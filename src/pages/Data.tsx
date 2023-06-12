@@ -1,10 +1,12 @@
 import { IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
 import VehicleDropdown from "../components/VehicleDropdown";
-import { Vehicle } from "hooks/useVehicles";
 import { useState } from "react";
-import useRefuels, { Refuel } from "../hooks/useRefuels";
+import useRefuels from "../hooks/useRefuels";
 import DeleteIcon from '@mui/icons-material/Delete';
+import { Refuel, Vehicle } from "../utils/types";
 
+//Table Ideas:
+//https://medium.com/appnroll-publication/5-practical-solutions-to-make-responsive-data-tables-ff031c48b122
 function formatDate(date: Date) {
   const dt = new Date(date);
 

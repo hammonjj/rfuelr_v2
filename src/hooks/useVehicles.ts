@@ -1,13 +1,7 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { supabase } from '../utils/supabaseClient';
 import useUser from './useUser';
-
-export interface Vehicle {
-    make: string;
-    model: string;
-    id: string | undefined;
-    odometer: number;
-}
+import { Vehicle } from '../utils/types';
 
 interface NewVehicle {
     make: string;
