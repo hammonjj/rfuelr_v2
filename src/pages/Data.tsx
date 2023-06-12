@@ -1,8 +1,9 @@
-import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
+import { IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
 import VehicleDropdown from "../components/VehicleDropdown";
 import { Vehicle } from "hooks/useVehicles";
 import { useState } from "react";
 import useRefuels, { Refuel } from "../hooks/useRefuels";
+import DeleteIcon from '@mui/icons-material/Delete';
 
 function formatDate(date: Date) {
   const dt = new Date(date);
@@ -16,11 +17,15 @@ function formatDate(date: Date) {
 
 export default function Data() {
   const [vehicle, setVehicle] = useState<Vehicle | null>();
-  const { getRefuelsByVehicle } = useRefuels();
+  const { getRefuelsByVehicle, deleteRefuel } = useRefuels();
 
   let refuels: Refuel[] = [];
   if(vehicle) {
     refuels = getRefuelsByVehicle(vehicle);
+  }
+
+  function handleDelete(refuel: Refuel) {
+    deleteRefuel(refuel.id);
   }
 
   return (
@@ -52,7 +57,14 @@ export default function Data() {
                 <TableCell align="right">{refuel.gallons}</TableCell>
                 <TableCell align="right">{refuel.omit ? "N/A" : refuel.tripMiles}</TableCell>
                 <TableCell align="right">{refuel.omit ? "N/A" : refuel.milesPerGallon.toFixed(2)}</TableCell>
-                <TableCell align="right">D</TableCell>
+                <TableCell align="right">
+                <IconButton
+                  aria-label="delete"
+                  onClick={() => handleDelete(refuel)}
+                >
+                  <DeleteIcon />
+                </IconButton>
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>

@@ -109,6 +109,12 @@ export default function useRefuels() {
 
   const deleteRefuelMutation = useMutation(deleteRefuel, {
     onSuccess: (deletedRefuelId) => {
+      if(deletedRefuelId === refuels![0].id) {
+        const vehicle = refuels?.find(refuel => refuel.id === deletedRefuelId)?.vehicle;
+        vehicle!.odometer = vehicle!.odometer - refuels![0].tripMiles;
+        updateVehicle(vehicle!);
+      }
+      
       queryClient.setQueryData(['refuels'], (oldRefuels: Refuel[] | undefined) => {
         return oldRefuels?.filter(refuel => refuel.id !== deletedRefuelId)
       });

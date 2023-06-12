@@ -1,15 +1,19 @@
 import React, { useState } from "react";
-import useVehicles from "../hooks/useVehicles";
+import useVehicles, { Vehicle } from "../hooks/useVehicles";
 import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 import { Accordion, AccordionDetails, AccordionSummary, Button, IconButton, Typography } from "@mui/material";
 import AddVehicleModal from "./AddVehicleModal";
 import ConfirmDialog from "./ConfirmDialog";
+import EditVehicleModal from "./EditVehicleModal";
 
 export default function VehicleAccordion() {
   const [expanded, setExpanded] = useState(false);
   const [addVehicleModalOpen, setAddVehicleModalOpen] = useState(false);
+  const [editVehicleModalOpen, setEditVehicleModalOpen] = useState(false);
+  const [editVehicle, setEditVehicle] = useState<Vehicle>();
   const [confirmDeleteModalOpen, setConfirmDeleteModalOpen] = useState(false);
-  const { vehicles, isLoading, addVehicle, deleteVehicle } = useVehicles();
+  const { vehicles, isLoading, addVehicle, deleteVehicle, updateVehicle } = useVehicles();
 
   function onVehicleSubmit(make: string, model: string, odometer: number) {
     addVehicle({
@@ -24,6 +28,7 @@ export default function VehicleAccordion() {
 
   return (
     <>
+      <EditVehicleModal open={editVehicleModalOpen} vehicle={editVehicle} handleClose={() => setEditVehicleModalOpen(false)} onSubmit={updateVehicle} />
       <AddVehicleModal open={addVehicleModalOpen} handleClose={() => setAddVehicleModalOpen(false)} onSubmit={onVehicleSubmit} />
       <Accordion expanded={expanded} onChange={() => setExpanded(!expanded)}>
         <AccordionSummary aria-controls="panel1d-content" id="vehicle-accordion">
@@ -50,6 +55,15 @@ export default function VehicleAccordion() {
                 <Typography>
                   {vehicle.odometer}
                 </Typography>
+                <IconButton
+                  aria-label="edit"
+                  onClick={() => {
+                    setEditVehicleModalOpen(true)
+                    setEditVehicle(vehicle);
+                  }}
+                >
+                  <EditIcon />
+                </IconButton>
                 <IconButton
                   aria-label="delete"
                   onClick={() => setConfirmDeleteModalOpen(true)}
