@@ -17,6 +17,9 @@ This is a rewrite of the original Rfuelr iOS app to be a PWA instead of a React-
 - [ ] Fix styling on dashboard cards
 - [ ] Add flip transition on dashboard cards
 - [ ] Add graphs to back of dashboard cards
-- [ ] Fix Typescript aliases (ex. "@hooks/useVehicles")
 - [ ] Add stepper for first time user setup
 - [ ] Add Rfuelr icon
+- [ ] Tech Debt: Fix Typescript aliases (ex. "@hooks/useVehicles")
+- [ ] Tech Debt: Refactor modals
+  - Rename modals to dialog
+  - Move modals to their own folder (ex. DashboardCards)
