@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from "@mui/material";
-import { Vehicle } from "../utils/types";
+import { Vehicle } from "../../utils/types";
 
-interface EditVehicleModalProps {
+interface EditVehicleDialogProps {
   open: boolean;
   vehicle: Vehicle | undefined;
   handleClose: () => void;
   onSubmit: (vehicle: Vehicle) => void;
 }
 
-export default function EditVehicleModal(props: EditVehicleModalProps) {
+export default function EditVehicleDialog(props: EditVehicleDialogProps) {
   const [make, setMake] = useState(props.vehicle ? props.vehicle.make : "");
   const [model, setModel] = useState(props.vehicle ? props.vehicle.model : "");
   const [odometer, setOdometer] = useState(props.vehicle ? props.vehicle.odometer : 0);

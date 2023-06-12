@@ -5,7 +5,7 @@ import HomeIcon from '@mui/icons-material/Home';
 import InsightsIcon from '@mui/icons-material/Insights';
 import SettingsIcon from '@mui/icons-material/Settings';
 import AddIcon from '@mui/icons-material/Add';
-import SubmitRefuelDialog from "./SubmitRefuelDialog";
+import SubmitRefuelDialog from "./Dialogs/SubmitRefuelDialog";
 import Data from "../pages/Data";
 import Home from "../pages/Home";
 

@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from "@mui/material";
 
-interface AddVehicleModalProps {
+interface AddVehicleDialogProps {
   open: boolean;
   handleClose: () => void;
   onSubmit: (make: string, model: string, odometer: number) => void;
 }
 
-export default function AddVehicleModal(props: AddVehicleModalProps) {
+export default function AddVehicleDialog(props: AddVehicleDialogProps) {
   const [make, setMake] = useState('');
   const [model, setModel] = useState('');
   const [odometer, setOdometer] = useState(0);

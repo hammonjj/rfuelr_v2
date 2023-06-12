@@ -1,12 +1,12 @@
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Switch, TextField, Typography } from "@mui/material";
-import VehicleDropdown from "./VehicleDropdown";
+import VehicleDropdown from "../VehicleDropdown";
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { useState } from "react";
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import dayjs from 'dayjs';
-import useRefuels from "../hooks/useRefuels";
-import { Vehicle } from "../utils/types";
+import useRefuels from "../../hooks/useRefuels";
+import { Vehicle } from "../../utils/types";
 
 interface SubmitRefuelDialogProps {
   open: boolean;

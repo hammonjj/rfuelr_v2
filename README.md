@@ -23,6 +23,6 @@ This is a rewrite of the original Rfuelr iOS app to be a PWA instead of a React-
 
 ## Tech Debt
 - [ ] Fix Typescript aliases (ex. "@hooks/useVehicles")
-- [ ] Refactor modals
+- [X] Refactor modals
   - Rename modals to dialog
   - Move modals to their own folder (ex. DashboardCards)
