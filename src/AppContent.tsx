@@ -4,8 +4,8 @@ import { useContext } from "react";
 import { CssBaseline, ThemeProvider, createTheme } from "@mui/material";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import LoggedInNavigationBar from "./components/LoggedInNavigationBar";
-import { Login } from "@mui/icons-material";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import Login from "@pages/Login";
 
 const queryClient = new QueryClient({
   defaultOptions: {
