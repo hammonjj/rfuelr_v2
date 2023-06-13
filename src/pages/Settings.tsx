@@ -1,7 +1,7 @@
 import { Button } from '@mui/material';
-import { supabase } from '../utils/supabaseClient';
-import VehicleAccordian from '../components/VehicleAccordian';
-import PreferencesAccordion from '../components/PreferencesAccording';
+import { supabase } from '@utils/supabaseClient';
+import VehicleAccordian from '@components/VehicleAccordian';
+import PreferencesAccordion from '@components/PreferencesAccording';
 
 export default function Settings() {
   async function signOut() {

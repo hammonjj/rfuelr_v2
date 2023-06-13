@@ -11,23 +11,23 @@ const manifestForPlugin: Partial<VitePWAOptions> = {
 		description: "An app that tracks mileage and fuel consumption",
 		icons: [
 			{
-				src: "/android-chrome-192x192.png",
+				src: "/icon-192x192.png",
 				sizes: "192x192",
 				type: "image/png",
 			},
 			{
-				src: "/android-chrome-512x512.png",
+				src: "/icon-512x512.png",
 				sizes: "512x512",
 				type: "image/png",
 			},
 			{
-				src: "/apple-touch-icon.png",
+				src: "/icon-180x180.png",
 				sizes: "180x180",
 				type: "image/png",
 				purpose: "apple touch icon",
 			},
 			{
-				src: "/maskable_icon.png",
+				src: "/icon-225x225.png",
 				sizes: "225x225",
 				type: "image/png",
 				purpose: "any maskable",
@@ -45,4 +45,13 @@ const manifestForPlugin: Partial<VitePWAOptions> = {
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react(), VitePWA(manifestForPlugin)],
+	resolve: {
+    alias: {
+      '@components': '/src/components',
+      '@hooks': '/src/hooks',
+      '@utils': '/src/utils',
+      '@pages': '/src/pages',
+      '@contexts': '/src/contexts',
+    }
+  }
 })

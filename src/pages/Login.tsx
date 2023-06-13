@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { supabase } from '../utils/supabaseClient';
+import { supabase } from '@utils/supabaseClient';
 import { Alert, AlertColor, Box, Button, Checkbox, Container, FormControlLabel, Grid, Link, Snackbar, TextField, Typography } from '@mui/material';
 
 export default function Login() {

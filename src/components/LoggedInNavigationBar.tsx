@@ -1,13 +1,13 @@
 import { BottomNavigation, BottomNavigationAction, Fab, Paper } from "@mui/material";
-import Settings from "../pages/Settings";
+import Settings from "@pages/Settings";
 import { useState } from "react";
 import HomeIcon from '@mui/icons-material/Home';
 import InsightsIcon from '@mui/icons-material/Insights';
 import SettingsIcon from '@mui/icons-material/Settings';
 import AddIcon from '@mui/icons-material/Add';
 import SubmitRefuelDialog from "./Dialogs/SubmitRefuelDialog";
-import Data from "../pages/Data";
-import Home from "../pages/Home";
+import Data from "@pages/Data";
+import Home from "@pages/Home";
 
 export default function LoggedInNavigationBar() {
   const [value, setValue] = useState(0);

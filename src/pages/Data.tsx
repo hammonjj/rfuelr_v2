@@ -1,10 +1,10 @@
-import VehicleDropdown from "../components/VehicleDropdown";
+import VehicleDropdown from "@components/VehicleDropdown";
 import { useState } from "react";
-import useRefuels from "../hooks/useRefuels";
-import { Refuel, Vehicle } from "../utils/types";
-import ConfirmDialog from "../components/Dialogs/ConfirmDialog";
-import { formatDate } from "../utils/helpers";
-import RefuelDataTable from "../components/Tables/RefuelDataTable";
+import useRefuels from "@hooks/useRefuels";
+import { Refuel, Vehicle } from "@utils/types";
+import ConfirmDialog from "@components/Dialogs/ConfirmDialog";
+import { formatDate } from "@utils/helpers";
+import RefuelDataTable from "@components/Tables/RefuelDataTable";
 
 export default function Data() {
   const [vehicle, setVehicle] = useState<Vehicle | null>();

@@ -1,7 +1,7 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { supabase } from '../utils/supabaseClient';
+import { supabase } from '@utils/supabaseClient';
 import useUser from './useUser';
-import { Vehicle } from '../utils/types';
+import { Vehicle } from '@utils/types';
 
 interface NewVehicle {
     make: string;

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from "@mui/material";
-import { Vehicle } from "../../utils/types";
+import { Vehicle } from "@utils/types";
 
 interface EditVehicleDialogProps {
   open: boolean;

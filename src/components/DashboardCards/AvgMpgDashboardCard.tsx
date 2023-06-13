@@ -1,4 +1,4 @@
-import { DashboardCardProps, Refuel } from "../../utils/types";
+import { DashboardCardProps, Refuel } from "@utils/types";
 import BaseDashboardCard from "./BaseDashboardCard";
 
 export default function AvgMpgDashboardCard(props: DashboardCardProps) {

@@ -1,11 +1,11 @@
-import useRefuels from "../hooks/useRefuels";
+import useRefuels from "@hooks/useRefuels";
 import { useState } from "react";
-import VehicleDropdown from "../components/VehicleDropdown";
-import { Refuel, Vehicle } from "../utils/types";
-import AvgMpgDashboardCard from "../components/DashboardCards/AvgMpgDashboardCard";
-import MilesDrivenDashboardCard from "../components/DashboardCards/MilesDrivenDashboardCard";
-import AvgFillDashboardCard from "../components/DashboardCards/AvgFillDashboardCard";
-import TotalCostDashboardCard from "../components/DashboardCards/TotalCostDashboardCard";
+import VehicleDropdown from "@components/VehicleDropdown";
+import { Refuel, Vehicle } from "@utils/types";
+import AvgMpgDashboardCard from "@components/DashboardCards/AvgMpgDashboardCard";
+import MilesDrivenDashboardCard from "@components/DashboardCards/MilesDrivenDashboardCard";
+import AvgFillDashboardCard from "@components/DashboardCards/AvgFillDashboardCard";
+import TotalCostDashboardCard from "@components/DashboardCards/TotalCostDashboardCard";
 
 export default function Home() {
   const [vehicle, setVehicle] = useState<Vehicle | null>();

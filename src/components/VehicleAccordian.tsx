@@ -1,12 +1,12 @@
 import { useState } from "react";
-import useVehicles from "../hooks/useVehicles";
+import useVehicles from "@hooks/useVehicles";
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import AddVehicleDialog from "./Dialogs/AddVehicleDialog";
 import ConfirmDialog from "./Dialogs/ConfirmDialog";
 import EditVehicleDialog from "./Dialogs/EditVehicleDialog";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { Vehicle } from "../utils/types";
+import { Vehicle } from "@utils/types";
 import { Accordion, AccordionDetails, AccordionSummary, Button, IconButton, Typography } from "@mui/material";
 
 export default function VehicleAccordion() {

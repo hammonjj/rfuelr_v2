@@ -1,8 +1,8 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import useUser from "./useUser";
 import useVehicles from "./useVehicles";
-import { supabase } from "../utils/supabaseClient";
-import { Refuel, RefuelSubmission, Vehicle } from "../utils/types";
+import { supabase } from "@utils/supabaseClient";
+import { Refuel, RefuelSubmission, Vehicle } from "@utils/types";
 
 export default function useRefuels() {
   const user = useUser();

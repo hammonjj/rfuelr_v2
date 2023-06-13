@@ -14,15 +14,15 @@ This is a rewrite of the original Rfuelr iOS app to be a PWA instead of a React-
 - [ ] Update refuel table styling to be more mobile friendly
   - Identify items for summary header
   - Accordian dropdown with additional metrics
-- [ ] Fix theme button in Preferences accordian
+- [X] Fix theme button in Preferences accordian
 - [ ] Fix styling on dashboard cards
 - [ ] Add flip transition on dashboard cards
 - [ ] Add graphs to back of dashboard cards
 - [ ] Add stepper for first time user setup
-- [ ] Add Rfuelr icon
+- [X] Add Rfuelr icon
 
 ## Tech Debt
-- [ ] Fix Typescript aliases (ex. "@hooks/useVehicles")
+- [X] Fix Typescript aliases (ex. "@hooks/useVehicles")
 - [X] Refactor modals
   - Rename modals to dialog
   - Move modals to their own folder (ex. DashboardCards)
