@@ -16,11 +16,10 @@ declare global {
   }
 }
 
-let refreshing: boolean = false;
-
 const updateSW = registerSW({
   onNeedRefresh() {
-    refreshing = true;
+    updateSW();
+    //window.location.reload();
     console.log('A new version is available');
   },
   onOfflineReady() {
@@ -31,12 +30,6 @@ const updateSW = registerSW({
 // Attach the updateSW function to some global scope that
 // you can access from anywhere in your app. For example, to the window object.
 window.updateApp = updateSW;
-
-document.addEventListener('visibilitychange', () => {
-  if (document.visibilityState === 'visible' && refreshing) {
-    window.location.reload();
-  }
-});
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
