@@ -5,6 +5,10 @@ import react from '@vitejs/plugin-react-swc'
 const manifestForPlugin: Partial<VitePWAOptions> = {
 	registerType: "prompt",
 	includeAssets: ["favicon.ico", "apple-touch-icon.png", "masked-icon.svg"],
+	workbox: {
+    skipWaiting: true,
+    clientsClaim: true,
+  },
 	manifest: {
 		name: "Refuelr",
 		short_name: "Rfuelr",

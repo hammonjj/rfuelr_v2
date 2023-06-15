@@ -11,7 +11,7 @@ This is a rewrite of the original Rfuelr iOS app to be a PWA instead of a React-
   - Vehicle edit failure
   - Vehicle delete failure
 - [ ] Update styling of cards
-- [ ] Update refuel table styling to be more mobile friendly
+- [X] Update refuel table styling to be more mobile friendly
   - Identify items for summary header
   - Accordian dropdown with additional metrics
 - [X] Fix theme button in Preferences accordian
