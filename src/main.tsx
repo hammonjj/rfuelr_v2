@@ -16,21 +16,27 @@ declare global {
   }
 }
 
-// Register the service worker
+let refreshing: boolean = false;
+
 const updateSW = registerSW({
   onNeedRefresh() {
-    // show a prompt to user
-    console.log('A new version is available. Do you want to update?');
+    refreshing = true;
+    console.log('A new version is available');
   },
   onOfflineReady() {
-    // show a ready to work offline to user
-    console.log('The app is ready to work offline.');
+    console.log('App ready to work offline.');
   },
 })
 
 // Attach the updateSW function to some global scope that
 // you can access from anywhere in your app. For example, to the window object.
 window.updateApp = updateSW;
+
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'visible' && refreshing) {
+    window.location.reload();
+  }
+});
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
