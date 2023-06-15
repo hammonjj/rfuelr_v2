@@ -5,11 +5,11 @@ This is a rewrite of the original Rfuelr iOS app to be a PWA instead of a React-
 ## To Do Items
 ### Roadmap
 - [ ] Update Error Handling
-  - Refuel submission failure
-  - Refuel delete failure
-  - Vehicle submission failure
-  - Vehicle edit failure
-  - Vehicle delete failure
+  - [X] Refuel submission failure
+  - [ ] Refuel delete failure
+  - [X] Vehicle submission failure
+  - [X] Vehicle edit failure
+  - [ ] Vehicle delete failure
 - [ ] Update styling of cards
 - [X] Update refuel table styling to be more mobile friendly
   - Identify items for summary header
@@ -24,5 +24,5 @@ This is a rewrite of the original Rfuelr iOS app to be a PWA instead of a React-
 ## Tech Debt
 - [X] Fix Typescript aliases (ex. "@hooks/useVehicles")
 - [X] Refactor modals
-  - Rename modals to dialog
-  - Move modals to their own folder (ex. DashboardCards)
+  - [X] Rename modals to dialog
+  - [X] Move modals to their own folder (ex. DashboardCards)

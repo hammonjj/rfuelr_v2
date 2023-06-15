@@ -13,19 +13,19 @@ export default function Home() {
 
   let refuels: Refuel[] = [];
   if(vehicle) {
-    refuels = getRefuelsByVehicle(vehicle);
+    refuels = getRefuelsByVehicle(vehicle, false);
   }
 
   return (
     <div style={{marginBottom: "5rem"}}>
-      <h1>Home</h1>
+      <h1>Home - Dashboard</h1>
       
       <div style={{marginBottom: "0.5rem"}}>
         <VehicleDropdown setVehicle={setVehicle}/>
       </div>
 
       <h2>Year to Date</h2>
-      <AvgMpgDashboardCard refuels={refuels} ytd={true}/>
+      <AvgMpgDashboardCard refuels={refuels} ytd={true} />
       <MilesDrivenDashboardCard refuels={refuels} ytd={true}/>
       <AvgFillDashboardCard refuels={refuels} ytd={true}/>
       <TotalCostDashboardCard refuels={refuels} ytd={true}/>

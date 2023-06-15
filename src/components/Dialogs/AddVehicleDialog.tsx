@@ -1,13 +1,15 @@
 import { useState } from "react";
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from "@mui/material";
+import useToast from "@hooks/useToast";
 
 interface AddVehicleDialogProps {
   open: boolean;
   handleClose: () => void;
-  onSubmit: (make: string, model: string, odometer: number) => void;
+  onSubmit: (make: string, model: string, odometer: number) => Promise<void>;
 }
 
 export default function AddVehicleDialog(props: AddVehicleDialogProps) {
+  const { showSuccess, showError } = useToast();
   const [make, setMake] = useState('');
   const [model, setModel] = useState('');
   const [odometer, setOdometer] = useState(0);
@@ -19,9 +21,16 @@ export default function AddVehicleDialog(props: AddVehicleDialogProps) {
     props.handleClose();
   }
 
-  function handleSubmit() {
-    props.onSubmit(make, model, odometer);
-    handleClose();
+  async function handleSubmit() {
+    try {
+      await props.onSubmit(make, model, odometer);
+
+      handleClose();
+      showSuccess("Vehicle added successfully!");
+    }
+    catch (error: any) {
+      showError("Unable to add vehicle: " + error.message);
+    }
   }
 
   return (

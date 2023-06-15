@@ -114,16 +114,17 @@ export default function useRefuels() {
     return refuelId;
   }
 
-  function getRefuelsByVehicle(vehicle: Vehicle) {
+  function getRefuelsByVehicle(vehicle: Vehicle, getAll: boolean = true) {
     return refuels === undefined ? [] : 
-      refuels?.filter(refuel => refuel.vehicle.id === vehicle.id);
+      refuels?.filter(refuel => refuel.vehicle.id === vehicle.id && 
+        (getAll ? true : !refuel.omit));
   }
   
   return { 
     getRefuelsByVehicle, 
     isLoading, 
     error, 
-    addRefuel: addRefuelMutation.mutate, 
+    addRefuel: addRefuelMutation.mutateAsync, 
     deleteRefuel: deleteRefuelMutation.mutate 
   };
 }

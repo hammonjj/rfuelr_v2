@@ -7,6 +7,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import dayjs from 'dayjs';
 import useRefuels from "@hooks/useRefuels";
 import { Vehicle } from "@utils/types";
+import useToast from "@hooks/useToast";
 
 interface SubmitRefuelDialogProps {
   open: boolean;
@@ -14,7 +15,8 @@ interface SubmitRefuelDialogProps {
 }
 
 export default function SubmitRefuelDialog(props: SubmitRefuelDialogProps) {
-  const { addRefuel } = useRefuels();
+  const { showError, showSuccess } = useToast();
+  const { addRefuel, getRefuelsByVehicle } = useRefuels();
   const [vehicle, setVehicle] = useState<Vehicle | null>();
   const [date, setDate] = useState<Date | null>(new Date());
   const [gallons, setGallons] = useState<number | null>(null);
@@ -22,22 +24,30 @@ export default function SubmitRefuelDialog(props: SubmitRefuelDialogProps) {
   const [omit, setOmit] = useState<boolean>(false);
   const [pricePerGallon, setPricePerGallon] = useState<number | null>(null);
 
-  function onSubmit() {
-    const tripMiles = omit ? 0 : odometer! - vehicle?.odometer!;
-    const milesPerGallon = omit ? 0 : (odometer! - vehicle?.odometer!) / gallons!;
-    
-    addRefuel({
-      vehicle: vehicle!,
-      date: date!,
-      gallons: gallons!,
-      odometer: odometer!,
-      omit: omit,
-      pricePerGallon: pricePerGallon!,
-      milesPerGallon: milesPerGallon,
-      tripMiles: tripMiles
-    });
+  const vehicleRefuels = vehicle ? getRefuelsByVehicle(vehicle) : [];
 
-    handleClose();
+  async function onSubmit() {
+    const omitFromMetrics = vehicleRefuels.length === 0 ? true : omit;
+    const tripMiles = omitFromMetrics ? 0 : odometer! - vehicle?.odometer!;
+    const milesPerGallon = omitFromMetrics ? 0 : (odometer! - vehicle?.odometer!) / gallons!;
+
+    try {
+      await addRefuel({
+        vehicle: vehicle!,
+        date: date!,
+        gallons: gallons!,
+        odometer: odometer!,
+        omit: omitFromMetrics,
+        pricePerGallon: pricePerGallon!,
+        milesPerGallon: milesPerGallon,
+        tripMiles: tripMiles
+      });
+  
+      handleClose();
+      showSuccess("Refuel submitted successfully");
+    } catch (error: any) {
+      showError("Unable to submit refuel request: " + error.message);
+    }
   }
 
   function handleClose() {
@@ -101,7 +111,10 @@ export default function SubmitRefuelDialog(props: SubmitRefuelDialogProps) {
         />
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <Typography>Omit from Metrics:</Typography>
-          <Switch checked={omit} onChange={(event) => setOmit(event.target.checked)}/>
+          <Switch 
+            checked={omit || vehicleRefuels.length === 0} 
+            onChange={(event) => setOmit(event.target.checked)}
+            disabled={vehicleRefuels.length === 0}/>
         </div>
       </DialogContent>
       <DialogActions>

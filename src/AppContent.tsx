@@ -6,6 +6,8 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import LoggedInNavigationBar from "./components/LoggedInNavigationBar";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import Login from "@pages/Login";
+import { ToastProvider } from "@contexts/ToastProvider";
+import Toast from "@components/Toast";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -33,9 +35,12 @@ const AppContent: React.FC<AppContentProps> = ({ session }) => {
   return (
     <ThemeProvider theme={theme}>
       <QueryClientProvider client={queryClient}>
-        <CssBaseline />
-          {session ? <LoggedInNavigationBar /> : <Login />}
-        <ReactQueryDevtools initialIsOpen={false} />
+        <ToastProvider>
+          <CssBaseline />
+          <Toast />
+            {session ? <LoggedInNavigationBar /> : <Login />}
+          <ReactQueryDevtools initialIsOpen={false} />
+        </ToastProvider>
       </QueryClientProvider>
     </ThemeProvider>
   )

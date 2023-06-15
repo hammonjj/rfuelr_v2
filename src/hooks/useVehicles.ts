@@ -98,9 +98,9 @@ export default function useVehicles() {
         vehicles, 
         isLoading, 
         error, 
-        addVehicle: addVehicleMutation.mutate, 
+        addVehicle: addVehicleMutation.mutateAsync, 
         deleteVehicle: deleteVehicleMutation.mutate,
-        updateVehicle: updateVehicleMutation.mutate, 
+        updateVehicle: updateVehicleMutation.mutateAsync, 
     };
 }
 

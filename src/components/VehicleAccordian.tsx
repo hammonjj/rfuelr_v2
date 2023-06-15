@@ -18,7 +18,7 @@ export default function VehicleAccordion() {
   const [confirmDeleteModalOpen, setConfirmDeleteModalOpen] = useState(false);
   const { vehicles, isLoading, addVehicle, deleteVehicle, updateVehicle } = useVehicles();
 
-  function onVehicleSubmit(make: string, model: string, odometer: number) {
+  async function onVehicleSubmit(make: string, model: string, odometer: number) {
     addVehicle({
       make: make,
       model: model,
@@ -28,6 +28,10 @@ export default function VehicleAccordion() {
 
     setAddVehicleModalOpen(false);
   }
+
+  async function onVehicleUpdate(vehicle: Vehicle) {
+    updateVehicle(vehicle);
+  } 
 
   return (
     <>
@@ -43,7 +47,7 @@ export default function VehicleAccordion() {
         open={editVehicleModalOpen} 
         vehicle={editVehicle} 
         handleClose={() => setEditVehicleModalOpen(false)} 
-        onSubmit={updateVehicle} 
+        onSubmit={onVehicleUpdate} 
       />
       <AddVehicleDialog 
         open={addVehicleModalOpen} 

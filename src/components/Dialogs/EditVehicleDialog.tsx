@@ -1,15 +1,17 @@
 import { useEffect, useState } from "react";
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from "@mui/material";
 import { Vehicle } from "@utils/types";
+import useToast from "@hooks/useToast";
 
 interface EditVehicleDialogProps {
   open: boolean;
   vehicle: Vehicle | undefined;
   handleClose: () => void;
-  onSubmit: (vehicle: Vehicle) => void;
+  onSubmit: (vehicle: Vehicle) => Promise<void>;
 }
 
 export default function EditVehicleDialog(props: EditVehicleDialogProps) {
+  const { showSuccess, showError } = useToast();
   const [make, setMake] = useState(props.vehicle ? props.vehicle.make : "");
   const [model, setModel] = useState(props.vehicle ? props.vehicle.model : "");
   const [odometer, setOdometer] = useState(props.vehicle ? props.vehicle.odometer : 0);
@@ -24,7 +26,7 @@ export default function EditVehicleDialog(props: EditVehicleDialogProps) {
     props.handleClose();
   }
 
-  function handleSubmit() {
+  async function handleSubmit() {
     const editedVehicle = {
       id: props.vehicle!.id,
       make: make,
@@ -32,8 +34,14 @@ export default function EditVehicleDialog(props: EditVehicleDialogProps) {
       odometer: odometer
     }
 
-    props.onSubmit(editedVehicle);
-    handleClose();
+    try {
+      await props.onSubmit(editedVehicle);
+
+      handleClose();
+      showSuccess("Vehicle edited successfully");
+    } catch (error: any) {
+      showError("Unable to edit vehicle: " + error.message);
+    }
   }
 
   return (
