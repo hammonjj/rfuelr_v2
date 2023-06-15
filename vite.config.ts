@@ -3,7 +3,6 @@ import { VitePWA, VitePWAOptions } from "vite-plugin-pwa";
 import react from '@vitejs/plugin-react-swc'
 
 const manifestForPlugin: Partial<VitePWAOptions> = {
-	//registerType: "prompt",
 	registerType: "autoUpdate",
 	includeAssets: ["favicon.ico", "apple-touch-icon.png", "masked-icon.svg"],
 	workbox: {
@@ -48,7 +47,6 @@ const manifestForPlugin: Partial<VitePWAOptions> = {
 	},
 };
 
-// https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react(), VitePWA(manifestForPlugin)],
 	resolve: {

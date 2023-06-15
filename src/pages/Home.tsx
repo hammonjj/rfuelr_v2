@@ -18,7 +18,7 @@ export default function Home() {
 
   return (
     <div style={{marginBottom: "5rem"}}>
-      <h1>Home - Dashboard</h1>
+      <h1>Home</h1>
       
       <div style={{marginBottom: "0.5rem"}}>
         <VehicleDropdown setVehicle={setVehicle}/>
