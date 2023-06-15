@@ -3,11 +3,13 @@ import { VitePWA, VitePWAOptions } from "vite-plugin-pwa";
 import react from '@vitejs/plugin-react-swc'
 
 const manifestForPlugin: Partial<VitePWAOptions> = {
-	registerType: "prompt",
+	//registerType: "prompt",
+	registerType: "autoUpdate",
 	includeAssets: ["favicon.ico", "apple-touch-icon.png", "masked-icon.svg"],
 	workbox: {
     skipWaiting: true,
     clientsClaim: true,
+		sourcemap: true,
   },
 	manifest: {
 		name: "Refuelr",
