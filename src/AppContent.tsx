@@ -1,6 +1,6 @@
 import { Session } from "@supabase/supabase-js";
 import SettingsContext from "./contexts/SettingsContext";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { CssBaseline, ThemeProvider, createTheme } from "@mui/material";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import LoggedInNavigationBar from "./components/LoggedInNavigationBar";
@@ -8,6 +8,7 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import Login from "@pages/Login";
 import { ToastProvider } from "@contexts/ToastProvider";
 import Toast from "@components/Toast";
+import { registerSW } from "virtual:pwa-register";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -26,6 +27,20 @@ interface AppContentProps {
 const AppContent: React.FC<AppContentProps> = ({ session }) => {
   const { darkMode } = useContext(SettingsContext);
 
+  useEffect(() => {
+    // The onNeedRefresh function should be set somewhere at a higher level in the
+    // component hierarchy, or in a context. Here it's done in an effect for simplicity.
+    registerSW({
+      onNeedRefresh: () => {
+        // A new version of the service worker is available
+        window.updateApp?.();
+      },
+      onOfflineReady: () => {
+        // The app is ready to work offline
+      },
+    });
+  }, []);
+  
   const theme = createTheme({
     palette: {
       mode: darkMode ? 'dark' : 'light',
