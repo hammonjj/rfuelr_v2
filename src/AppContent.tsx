@@ -10,8 +10,9 @@ import Login from "@pages/Login";
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
+      refetchOnReconnect: true,
       refetchOnWindowFocus: true,
-      staleTime: Infinity,
+      staleTime: 600000,
     },
   }
 });
