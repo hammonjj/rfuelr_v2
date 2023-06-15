@@ -5,9 +5,15 @@ interface BaseDashboardCardProps {
   value: string;
 }
 
+const style = {
+  card: {
+    marginBottom: "0.5rem"
+  }
+}
+
 export default function BaseDashboardCard(props: BaseDashboardCardProps) {
   return (
-    <Card>
+    <Card style={style.card}>
       <CardContent>
       <Typography variant="h6">
           {props.title}
@@ -19,3 +25,4 @@ export default function BaseDashboardCard(props: BaseDashboardCardProps) {
     </Card>
   );
 }
+
