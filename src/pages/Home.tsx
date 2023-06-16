@@ -33,8 +33,8 @@ export default function Home() {
       <h2>Lifetime</h2>
       <AvgMpgDashboardCard refuels={refuels} ytd={false}/>
       <MilesDrivenDashboardCard refuels={refuels} ytd={false}/>
-      <AvgFillDashboardCard refuels={refuels} ytd={true}/>
-      <TotalCostDashboardCard refuels={refuels} ytd={true}/>
+      <AvgFillDashboardCard refuels={refuels} ytd={false}/>
+      <TotalCostDashboardCard refuels={refuels} ytd={false}/>
     </div>
   );
 }

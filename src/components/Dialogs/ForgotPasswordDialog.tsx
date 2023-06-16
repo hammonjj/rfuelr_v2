@@ -20,7 +20,7 @@ export default function ForgotPasswordDialog(props: ForgotPasswordDialogProps) {
   async function handleSubmit() {
     const { error } = await supabase.auth.resetPasswordForEmail(
       email,
-      { redirectTo: "http://rfuelr.netlify.app/update-password" }
+      { redirectTo: "http://rfuelr.netlify.app/change-password" }
     );
     
     if(error) {

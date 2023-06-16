@@ -17,7 +17,7 @@ export default function AccountAccordion() {
   async function onPasswordUpdate() {
     const { error } = await supabase.auth.resetPasswordForEmail(
       user?.email ?? "",
-      { redirectTo: "http://rfuelr.netlify.app/update-password" }
+      { redirectTo: "http://rfuelr.netlify.app/change-password" }
     );
     
     if(error) {
