@@ -5,10 +5,10 @@ import { CssBaseline, ThemeProvider, createTheme } from "@mui/material";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import LoggedInNavigationBar from "./components/LoggedInNavigationBar";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import Login from "@pages/Login";
 import { ToastProvider } from "@contexts/ToastProvider";
 import Toast from "@components/Toast";
 import { registerSW } from "virtual:pwa-register";
+import LoggedOutNavigationBar from "@components/LoggedOutNavigationBar";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -40,7 +40,7 @@ const AppContent: React.FC<AppContentProps> = ({ session }) => {
       },
     });
   }, []);
-  
+
   const theme = createTheme({
     palette: {
       mode: darkMode ? 'dark' : 'light',
@@ -53,7 +53,7 @@ const AppContent: React.FC<AppContentProps> = ({ session }) => {
         <ToastProvider>
           <CssBaseline />
           <Toast />
-            {session ? <LoggedInNavigationBar /> : <Login />}
+            {session ? <LoggedInNavigationBar /> : <LoggedOutNavigationBar />}
           <ReactQueryDevtools initialIsOpen={false} />
         </ToastProvider>
       </QueryClientProvider>

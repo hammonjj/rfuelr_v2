@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { supabase } from '@utils/supabaseClient';
 import { Box, Button, Checkbox, Container, FormControlLabel, Grid, Link, TextField, Typography } from '@mui/material';
 import useToast from '@hooks/useToast';
+import ForgotPasswordDialog from '@components/Dialogs/ForgotPasswordDialog';
 
 export default function Login() {
     const [email, setEmail] = useState('');
@@ -10,11 +11,16 @@ export default function Login() {
     const [loginButtonEnabled, setLoginButtonEnabled] = useState(true);
 
     const { showError } = useToast();
+    const [openPasswordResetDialog, setOpenPasswordResetDialog] = useState(false);
+
+    function handleClosePasswordResetDialog() {
+      setOpenPasswordResetDialog(false);
+    }
 
     useEffect(() => {
       const storedEmail = localStorage.getItem('email');
       const storedPassword = localStorage.getItem('password');
-      
+
       if (storedEmail && storedPassword) {
         setRememberMe(true);
         setEmail(storedEmail);
@@ -48,6 +54,7 @@ export default function Login() {
 
     return (
       <Container component="main" maxWidth="sm">
+        <ForgotPasswordDialog open={openPasswordResetDialog} handleClose={handleClosePasswordResetDialog}/>
         <Box
           sx={{
             boxShadow: 3,
@@ -114,13 +121,10 @@ export default function Login() {
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link href="#" variant="body2">
+                <Link variant="body2" href="#" onClick={() => { 
+                  setOpenPasswordResetDialog(true);
+                }}>
                   Forgot password?
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link href="#" variant="body2">
-                  {"Sign Up"}
                 </Link>
               </Grid>
             </Grid>
