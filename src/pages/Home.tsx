@@ -17,7 +17,7 @@ export default function Home() {
   }
 
   return (
-    <div style={{marginBottom: "5rem", marginLeft: "0.5rem", marginRight: "0.5rem"}}>
+    <div style={{marginBottom: "5rem"}}>
       <h1>Home - 9:42</h1>
       
       <div style={{marginBottom: "0.5rem"}}>

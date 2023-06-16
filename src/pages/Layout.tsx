@@ -19,7 +19,9 @@ export default function Layout() {
       <ToastProvider>
         <Toast />
         <CssBaseline />
-        <Outlet />
+        <div style={{marginLeft: "0.5rem", marginRight: "0.5rem"}}>
+          <Outlet />
+        </div>
       </ToastProvider>
     </ThemeProvider>
   );

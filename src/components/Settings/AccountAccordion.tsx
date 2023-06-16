@@ -29,7 +29,7 @@ export default function AccountAccordion() {
   return (
     <>
       <EditEmailDialog open={editEmailModalOpen} currentEmail={user?.email ?? ""} handleClose={() => setEditEmailModalOpen(false)} />
-      <Accordion expanded={expanded} onChange={() => setExpanded(!expanded)} disableGutters={true}>
+      <Accordion expanded={expanded} onChange={() => setExpanded(!expanded)} >
         <AccordionSummary aria-controls="panel1d-content" id="vehicle-accordion" expandIcon={<ExpandMoreIcon />}>
           <Typography>Account</Typography>
         </AccordionSummary>

@@ -8,7 +8,7 @@ export default function PreferencesAccordion() {
   const { darkMode, toggleDarkMode } = useContext(SettingsContext);
 
   return (
-    <Accordion expanded={expanded} onChange={() => setExpanded(!expanded)} disableGutters={true}>
+    <Accordion expanded={expanded} onChange={() => setExpanded(!expanded)} >
       <AccordionSummary aria-controls="panel1d-content" id="vehicle-accordion" expandIcon={<ExpandMoreIcon />}>
         <Typography>Preferences</Typography>
       </AccordionSummary>

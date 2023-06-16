@@ -54,7 +54,7 @@ export default function VehicleAccordion() {
         handleClose={() => setAddVehicleModalOpen(false)} 
         onSubmit={onVehicleSubmit} 
       />
-      <Accordion expanded={expanded} onChange={() => setExpanded(!expanded)} disableGutters={true}>
+      <Accordion expanded={expanded} onChange={() => setExpanded(!expanded)} >
         <AccordionSummary aria-controls="panel1d-content" id="vehicle-accordion" expandIcon={<ExpandMoreIcon />}>
           <Typography>Vehicles</Typography>
         </AccordionSummary>
