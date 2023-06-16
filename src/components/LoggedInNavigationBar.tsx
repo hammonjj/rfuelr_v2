@@ -26,7 +26,7 @@ export default function LoggedInNavigationBar() {
           color="primary" 
           aria-label="add"
           onClick={() => setRefuelOpen(true)}
-          style={{ position: 'absolute', bottom: 60, right: 16 }}>
+          style={{ position: 'absolute', bottom: 70, right: 16 }}>
           <AddIcon />
         </Fab>
         <BottomNavigation
