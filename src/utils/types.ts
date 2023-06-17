@@ -7,6 +7,8 @@ export interface Refuel {
   omit: boolean;
   tripMiles: number;
   milesPerGallon: number;
+  latitude: number | null;
+  longitude: number | null;
 }
 
 export interface RefuelSubmission {
@@ -18,6 +20,8 @@ export interface RefuelSubmission {
   gallons: number;
   omit: boolean;
   tripMiles: number;
+  latitude: number | null;
+  longitude: number | null;
 }
 
 export interface Vehicle {

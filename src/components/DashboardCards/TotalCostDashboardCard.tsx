@@ -5,7 +5,7 @@ export default function TotalCostDashboardCard(props: DashboardCardProps) {
   const totalCost = sumCost(props.refuels, props.ytd);
 
   return (
-    <BaseDashboardCard title="Total Cost" value={totalCost.toFixed(2)} />
+    <BaseDashboardCard title="Total Cost" value={"$" + totalCost.toFixed(2)} />
   );
 }
 

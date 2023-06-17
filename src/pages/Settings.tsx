@@ -3,9 +3,13 @@ import { supabase } from '@utils/supabaseClient';
 import VehicleAccordian from '@components/Settings/VehicleAccordion';
 import PreferencesAccordion from '@components/Settings/PreferencesAccordion';
 import AccountAccordion from '@components/Settings/AccountAccordion';
+import { useQueryClient } from '@tanstack/react-query';
 
 export default function Settings() {
+  const queryClient = useQueryClient();
+  
   async function signOut() {
+    queryClient.invalidateQueries();
     supabase.auth.signOut();
   }
 

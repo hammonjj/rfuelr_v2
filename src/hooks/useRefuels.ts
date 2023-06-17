@@ -23,7 +23,7 @@ export default function useRefuels() {
 
     const { data, error } = await supabase
       .from('Refuel.FillUps')
-      .select('id, date, vehicle, price_per_gallon, miles_per_gallon, gallons, omit, trip_miles')
+      .select('id, date, vehicle, price_per_gallon, miles_per_gallon, gallons, omit, trip_miles, latitude, longitude')
       .in('vehicle', vehicleIds)
       .order('date', { ascending: false });
 
@@ -42,6 +42,8 @@ export default function useRefuels() {
         gallons: refuel.gallons,
         omit: refuel.omit,
         tripMiles: refuel.trip_miles,
+        latitude: refuel.latitude,
+        longitude: refuel.longitude,
       }
     });
 
@@ -55,7 +57,7 @@ export default function useRefuels() {
       updateVehicle(vehicle);
 
       queryClient.setQueryData(['refuels'], (oldRefuels: Refuel[] | undefined) => {
-        return [...oldRefuels || [], newRefuel]
+        return [newRefuel, ...oldRefuels || []]
       });
     },
   });
@@ -69,6 +71,8 @@ export default function useRefuels() {
       gallons: newRefuel.gallons,
       omit: newRefuel.omit,
       trip_miles: newRefuel.tripMiles,
+      longitude: newRefuel.longitude,
+      latitude: newRefuel.latitude,
     };
 
     const { data, error } = await supabase

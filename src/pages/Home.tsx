@@ -6,6 +6,7 @@ import AvgMpgDashboardCard from "@components/DashboardCards/AvgMpgDashboardCard"
 import MilesDrivenDashboardCard from "@components/DashboardCards/MilesDrivenDashboardCard";
 import AvgFillDashboardCard from "@components/DashboardCards/AvgFillDashboardCard";
 import TotalCostDashboardCard from "@components/DashboardCards/TotalCostDashboardCard";
+import AvgCostDashboardCard from "@components/DashboardCards/AvgCostDashboardCard";
 
 export default function Home() {
   const [vehicle, setVehicle] = useState<Vehicle | null>();
@@ -18,7 +19,7 @@ export default function Home() {
 
   return (
     <div style={{marginBottom: "5rem"}}>
-      <h1>Home - 9:42</h1>
+      <h1>Home</h1>
       
       <div style={{marginBottom: "0.5rem"}}>
         <VehicleDropdown setVehicle={setVehicle}/>
@@ -28,12 +29,14 @@ export default function Home() {
       <AvgMpgDashboardCard refuels={refuels} ytd={true} />
       <MilesDrivenDashboardCard refuels={refuels} ytd={true}/>
       <AvgFillDashboardCard refuels={refuels} ytd={true}/>
+      <AvgCostDashboardCard refuels={refuels} ytd={true}/>
       <TotalCostDashboardCard refuels={refuels} ytd={true}/>
 
       <h2>Lifetime</h2>
       <AvgMpgDashboardCard refuels={refuels} ytd={false}/>
       <MilesDrivenDashboardCard refuels={refuels} ytd={false}/>
       <AvgFillDashboardCard refuels={refuels} ytd={false}/>
+      <AvgCostDashboardCard refuels={refuels} ytd={false}/>
       <TotalCostDashboardCard refuels={refuels} ytd={false}/>
     </div>
   );

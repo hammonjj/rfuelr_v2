@@ -8,6 +8,7 @@ import dayjs from 'dayjs';
 import useRefuels from "@hooks/useRefuels";
 import { Vehicle } from "@utils/types";
 import useToast from "@hooks/useToast";
+import useLocation from "@hooks/useLocation";
 
 interface SubmitRefuelDialogProps {
   open: boolean;
@@ -16,6 +17,7 @@ interface SubmitRefuelDialogProps {
 
 export default function SubmitRefuelDialog(props: SubmitRefuelDialogProps) {
   const { showError, showSuccess } = useToast();
+  const { location, error} = useLocation();
   const { addRefuel, getRefuelsByVehicle } = useRefuels();
   const [vehicle, setVehicle] = useState<Vehicle | null>();
   const [date, setDate] = useState<Date | null>(new Date());
@@ -40,7 +42,9 @@ export default function SubmitRefuelDialog(props: SubmitRefuelDialogProps) {
         omit: omitFromMetrics,
         pricePerGallon: pricePerGallon!,
         milesPerGallon: milesPerGallon,
-        tripMiles: tripMiles
+        tripMiles: tripMiles,
+        latitude: location ? location?.latitude : null,
+        longitude: location ? location?.longitude : null
       });
   
       handleClose();
