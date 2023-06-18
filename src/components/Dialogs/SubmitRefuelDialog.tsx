@@ -17,7 +17,7 @@ interface SubmitRefuelDialogProps {
 
 export default function SubmitRefuelDialog(props: SubmitRefuelDialogProps) {
   const { showError, showSuccess } = useToast();
-  const { location, error} = useLocation();
+  const { location} = useLocation();
   const { addRefuel, getRefuelsByVehicle } = useRefuels();
   const [vehicle, setVehicle] = useState<Vehicle | null>();
   const [date, setDate] = useState<Date | null>(new Date());
