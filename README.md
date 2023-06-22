@@ -26,3 +26,12 @@ This is a rewrite of the original Rfuelr iOS app to be a PWA instead of a React-
 - [X] Refactor modals
   - [X] Rename modals to dialog
   - [X] Move modals to their own folder (ex. DashboardCards)
+
+## Tech Items
+Charting Library
+https://devexpress.github.io/devextreme-reactive/react/chart/docs/guides/getting-started/
+
+```
+npm i --save @devexpress/dx-react-core @devexpress/dx-react-chart
+npm i --save @devexpress/dx-react-chart-material-ui
+```
