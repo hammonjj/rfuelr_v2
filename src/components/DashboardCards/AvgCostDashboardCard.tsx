@@ -5,7 +5,9 @@ export default function AvgCostDashboardCard(props: DashboardCardProps) {
   const avgCost = getAvgCost(props.refuels, props.ytd);
 
   return (
-    <BaseDashboardCard title="Average Cost" value={"$" + avgCost.toFixed(2)} />
+    <BaseDashboardCard title="Average Cost" value={"$" + avgCost.toFixed(2)}>
+      
+    </BaseDashboardCard>
   );
 }
 
