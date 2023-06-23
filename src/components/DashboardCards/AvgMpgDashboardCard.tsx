@@ -12,8 +12,8 @@ export default function AvgMpgDashboardCard(props: DashboardCardProps) {
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis dataKey="month" />      
             <YAxis type="number" tickCount={20} allowDecimals={false} domain={([dataMin, dataMax]) => { 
-              const min = Math.floor(dataMin - 5);
-              const max = Math.ceil(dataMax + 5);
+              const min = Math.floor(dataMin - 4);
+              const max = Math.ceil(dataMax + 3);
               return [min, max]; 
               }} 
             />
