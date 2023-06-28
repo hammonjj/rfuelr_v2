@@ -30,7 +30,15 @@ export default function Home() {
   function swipeCallback(_eventData: any, direction: string) {
     //Left: "left" -> Add one to current tab
     //Right: "right" -> Subtract one from current tab
-    setCurrentTab((currentTab + (direction === "left" ? 1 : -1)) % 3);
+    setCurrentTab((currentTab) => {
+      if (direction === "left") {
+        return (currentTab + 1) % 3;
+      } else if (direction === "right") {
+        return currentTab === 0 ? 2 : currentTab - 1;
+      } else {
+        return currentTab;
+      }
+    });
   }
 
   let refuels: Refuel[] = [];
@@ -55,10 +63,11 @@ export default function Home() {
         onChange={onTabChange} 
         aria-label="metrics tabs"
         centered={true}
+        TabIndicatorProps={{style: {background:'transparent'}}}
       >
         {Array.from({ length: 3 }, (_, i) => (
           <Tab key={i} icon={
-            <SvgIcon fontSize="small">
+            <SvgIcon fontSize="inherit" style={{fontSize: "17px"}}>
               {currentTab === i ? <FiberManualRecordIcon /> : <FiberManualRecordOutlinedIcon />}
             </SvgIcon>}
           />
