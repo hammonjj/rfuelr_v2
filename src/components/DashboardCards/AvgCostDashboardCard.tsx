@@ -1,11 +1,25 @@
 import { DashboardCardProps, Refuel } from "@utils/types";
 import BaseDashboardCard from "./BaseDashboardCard";
 import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from "recharts";
+//import { useTooltipContext } from "@hooks/useTooltipContext";
 
 export default function AvgCostDashboardCard(props: DashboardCardProps) {
   const avgCost = getAvgCost(props.refuels, props.ytd);
   const avgCostByMonth = getAvgFillCostByMonth(props.refuels, props.ytd);
+/*
+  const { openTooltip, closeTooltip } = useTooltipContext();
 
+  const tooltipStyle = {
+    backgroundColor: "white",
+    borderColor: "black",
+    borderStyle: "solid",
+    borderWidth: 1,
+    borderRadius: "1%",
+    fontFamily: "helvetica, sans-serif",
+    fontSize: "16px",
+    padding: ".5%"
+  };
+*/
   return (
     <BaseDashboardCard title="Average Cost" value={"$" + avgCost.toFixed(2)}>
       <BarChart width={300} height={300} data={avgCostByMonth}>
@@ -21,7 +35,17 @@ export default function AvgCostDashboardCard(props: DashboardCardProps) {
               return "$" + tick;
             }}
           />
-          <Bar dataKey="cost" fill="#8884d8" />
+          <Bar 
+            dataKey="cost" 
+            fill="#8884d8" 
+            onMouseEnter={e => {
+              console.log("e: ", e);
+              }
+            }
+            onMouseLeave={() => {
+              console.log("Leaving")
+            }}
+            />
         </BarChart>
     </BaseDashboardCard>
   );
