@@ -32,6 +32,5 @@ export interface Vehicle {
 }
 
 export interface DashboardCardProps {
-  ytd: boolean;
   refuels: Refuel[];
 }

@@ -1,13 +1,14 @@
 import { BottomNavigation, BottomNavigationAction, Fab, Paper } from "@mui/material";
 import Settings from "@pages/Settings";
-import { useState } from "react";
+import { Suspense, lazy, useState } from "react";
 import HomeIcon from '@mui/icons-material/Home';
 import InsightsIcon from '@mui/icons-material/Insights';
 import SettingsIcon from '@mui/icons-material/Settings';
 import AddIcon from '@mui/icons-material/Add';
-import SubmitRefuelDialog from "./Dialogs/SubmitRefuelDialog";
 import Data from "@pages/Data";
 import Home from "@pages/Home";
+
+const SubmitRefuelDialog = lazy(() => import('./Dialogs/SubmitRefuelDialog'));
 
 export default function LoggedInNavigationBar() {
   const [value, setValue] = useState(0);
@@ -19,9 +20,13 @@ export default function LoggedInNavigationBar() {
       {value === 1 && <Data/>}
       {value === 2 && <Settings/>}
       
-      <SubmitRefuelDialog open={refuelOpen} handleClose={() => setRefuelOpen(false)}/>
+      {refuelOpen && (
+        <Suspense fallback={<div>Loading...</div>}>
+          <SubmitRefuelDialog open={refuelOpen} handleClose={() => setRefuelOpen(false)}/>
+        </Suspense>
+      )}
+
       <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
-        
         <Fab 
           color="primary" 
           aria-label="add"

@@ -3,8 +3,8 @@ import BaseDashboardCard from "./BaseDashboardCard";
 import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from "recharts";
 
 export default function MilesDrivenDashboardCard(props: DashboardCardProps) {
-  const milesDriven = sumTripMiles(props.refuels, props.ytd);
-  const milesDrivenByMonth = getRefuelsByMonth(props.refuels, props.ytd);
+  const milesDriven = sumTripMiles(props.refuels);
+  const milesDrivenByMonth = getRefuelsByMonth(props.refuels);
 
   return (
     <BaseDashboardCard title="Miles Driven" value={milesDriven.toFixed(2)}>
@@ -23,31 +23,21 @@ export default function MilesDrivenDashboardCard(props: DashboardCardProps) {
   );
 }
 
-function sumTripMiles(refuels: Refuel[], ytd: boolean): number {
+function sumTripMiles(refuels: Refuel[]): number {
   if(refuels.length < 1) {
     return 0;
   }
 
-  let filteredRefuels = ytd ? refuels : refuels.filter(refuel => {
-    return (new Date(refuel.date)).getFullYear() === (new Date().getFullYear())
-  });
-
-  return filteredRefuels.reduce((sum, refuel) => sum + refuel.tripMiles, 0);
+  return refuels.reduce((sum, refuel) => sum + refuel.tripMiles, 0);
 }
 
-//Function called getrefuelsbymonth that takes a refuel array and year to date boolean 
-//and returns an array of objects with the month/year and miles driven
-function getRefuelsByMonth(refuels: Refuel[], ytd: boolean): { month: string, miles: number }[] {
+function getRefuelsByMonth(refuels: Refuel[]): { month: string, miles: number }[] {
   if(refuels.length < 1) {
     return [];
   }
 
-  let filteredRefuels = ytd ? refuels : refuels.filter(refuel => {
-    return (new Date(refuel.date)).getFullYear() === (new Date().getFullYear())
-  });
-
   let milesDrivenByMonth: { [key: string]: number } = {};
-  filteredRefuels.forEach(refuel => {
+  refuels.forEach(refuel => {
     const date = new Date(refuel.date);
     const month = date.getMonth()+1;
     const year = date.getFullYear();

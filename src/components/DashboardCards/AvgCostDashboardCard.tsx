@@ -4,8 +4,8 @@ import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from "recharts";
 //import { useTooltipContext } from "@hooks/useTooltipContext";
 
 export default function AvgCostDashboardCard(props: DashboardCardProps) {
-  const avgCost = getAvgCost(props.refuels, props.ytd);
-  const avgCostByMonth = getAvgFillCostByMonth(props.refuels, props.ytd);
+  const avgCost = getAvgCost(props.refuels);
+  const avgCostByMonth = getAvgFillCostByMonth(props.refuels);
 /*
   const { openTooltip, closeTooltip } = useTooltipContext();
 
@@ -51,33 +51,25 @@ export default function AvgCostDashboardCard(props: DashboardCardProps) {
   );
 }
 
-function getAvgCost(refuels: Refuel[], ytd: boolean): number {
+function getAvgCost(refuels: Refuel[]): number {
   if(refuels.length < 1) {
     return 0;
   }
 
-  let filteredRefuels = ytd ? refuels : refuels.filter(refuel => {
-    return (new Date(refuel.date)).getFullYear() === (new Date().getFullYear())
-  });
-
-  const cost = filteredRefuels.reduce(
+  const cost = refuels.reduce(
     (sum, refuel) => sum + (refuel.gallons * refuel.pricePerGallon), 0);
 
-  return cost / filteredRefuels.length;
+  return cost / refuels.length;
 }
 
-function getAvgFillCostByMonth(refuels: Refuel[], ytd: boolean): { month: string, cost: number }[] {
+function getAvgFillCostByMonth(refuels: Refuel[]): { month: string, cost: number }[] {
   if(refuels.length < 1) {
     return [];
   }
 
-  let filteredRefuels = ytd ? refuels : refuels.filter(refuel => {
-    return (new Date(refuel.date)).getFullYear() === (new Date().getFullYear())
-  });
-
   let costByMonth: { [key: string]: number } = {};
   let fillupsByMonth: { [key: string]: number } = {};
-  filteredRefuels.forEach(refuel => {
+  refuels.forEach(refuel => {
     const date = new Date(refuel.date);
     const month = date.getMonth()+1;
     const year = date.getFullYear();

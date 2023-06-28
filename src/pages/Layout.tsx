@@ -11,7 +11,7 @@ export default function Layout() {
   const theme = createTheme({
     palette: {
       mode: darkMode ? 'dark' : 'light',
-    },
+    }
   });
   
   return (

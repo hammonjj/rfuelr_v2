@@ -3,8 +3,8 @@ import { DashboardCardProps, Refuel } from "@utils/types";
 import BaseDashboardCard from "./BaseDashboardCard";
 
 export default function AvgMpgDashboardCard(props: DashboardCardProps) {
-  const avgMpg = getAvgMpg(props.refuels, props.ytd);
-  const avgMpgByMonth = getAvgMpgByMonth(props.refuels, props.ytd);
+  const avgMpg = getAvgMpg(props.refuels);
+  const avgMpgByMonth = getAvgMpgByMonth(props.refuels);
 
   return (
       <BaseDashboardCard title="Average MPG" value={avgMpg.toFixed(2)} >
@@ -23,33 +23,25 @@ export default function AvgMpgDashboardCard(props: DashboardCardProps) {
   );
 }
 
-function getAvgMpg(refuels: Refuel[], ytd: boolean): number {
+function getAvgMpg(refuels: Refuel[]): number {
   if(refuels.length < 1) {
     return 0;
   }
 
-  let filteredRefuels = ytd ? refuels : refuels.filter(refuel => {
-    return (new Date(refuel.date)).getFullYear() === (new Date().getFullYear())
-  });
-
-  const gallons = filteredRefuels.reduce((sum, refuel) => sum + refuel.gallons, 0);
-  const milesDriven = filteredRefuels.reduce((sum, refuel) => sum + refuel.tripMiles, 0);
+  const gallons = refuels.reduce((sum, refuel) => sum + refuel.gallons, 0);
+  const milesDriven = refuels.reduce((sum, refuel) => sum + refuel.tripMiles, 0);
 
   return milesDriven / gallons;
 }
 
-function getAvgMpgByMonth(refuels: Refuel[], ytd: boolean): { month: string, mpg: number }[] {
+function getAvgMpgByMonth(refuels: Refuel[]): { month: string, mpg: number }[] {
   if(refuels.length < 1) {
     return [];
   }
 
-  let filteredRefuels = ytd ? refuels : refuels.filter(refuel => {
-    return (new Date(refuel.date)).getFullYear() === (new Date().getFullYear())
-  });
-
   let milesDrivenByMonth: { [key: string]: number } = {};
   let gallonsByMonth: { [key: string]: number } = {};
-  filteredRefuels.forEach(refuel => {
+  refuels.forEach(refuel => {
     const date = new Date(refuel.date);
     const month = date.getMonth()+1;
     const year = date.getFullYear();

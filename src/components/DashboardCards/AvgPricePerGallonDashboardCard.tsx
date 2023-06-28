@@ -4,8 +4,8 @@ import BaseDashboardCard from './BaseDashboardCard';
 import { BarChart, Bar, CartesianGrid, XAxis, YAxis } from 'recharts';
 
 export default function AvgPricePerGallonDashboardCard(props: DashboardCardProps) {
-  const avgPricePerGallon = getAvgPricePerGallon(props.refuels, props.ytd);
-  const avgPricePerGallonByMonth = getAvgPricePerGallonByMonth(props.refuels, props.ytd);
+  const avgPricePerGallon = getAvgPricePerGallon(props.refuels);
+  const avgPricePerGallonByMonth = getAvgPricePerGallonByMonth(props.refuels);
 
   return (
     <BaseDashboardCard title="Average Price Per Gallon" value={"$" +avgPricePerGallon.toFixed(2)}>
@@ -25,33 +25,25 @@ export default function AvgPricePerGallonDashboardCard(props: DashboardCardProps
   );
 }
 
-function getAvgPricePerGallon(refuels: Refuel[], ytd: boolean): number {
+function getAvgPricePerGallon(refuels: Refuel[]): number {
   if(refuels.length < 1) {
     return 0;
   }
 
-  let filteredRefuels = ytd ? refuels : refuels.filter(refuel => {
-    return (new Date(refuel.date)).getFullYear() === (new Date().getFullYear())
-  });
-
-  const pricePerGallon = filteredRefuels.reduce((sum, refuel) => sum + refuel.pricePerGallon, 0);
-  const fillups = filteredRefuels.length;
+  const pricePerGallon = refuels.reduce((sum, refuel) => sum + refuel.pricePerGallon, 0);
+  const fillups = refuels.length;
 
   return pricePerGallon / fillups;
 }
 
-function getAvgPricePerGallonByMonth(refuels: Refuel[], ytd: boolean): { month: string, pricePerGallon: number }[] {
+function getAvgPricePerGallonByMonth(refuels: Refuel[]): { month: string, pricePerGallon: number }[] {
   if(refuels.length < 1) {
     return [];
   }
 
-  let filteredRefuels = ytd ? refuels : refuels.filter(refuel => {
-    return (new Date(refuel.date)).getFullYear() === (new Date().getFullYear())
-  });
-
   let pricePerGallonByMonth: { [key: string]: number } = {};
   let fillupsByMonth: { [key: string]: number } = {};
-  filteredRefuels.forEach(refuel => {
+  refuels.forEach(refuel => {
     const date = new Date(refuel.date);
     const month = date.getMonth()+1;
     const year = date.getFullYear();
