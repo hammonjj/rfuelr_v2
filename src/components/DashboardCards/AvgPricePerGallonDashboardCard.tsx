@@ -8,7 +8,7 @@ export default function AvgPricePerGallonDashboardCard(props: DashboardCardProps
   const avgPricePerGallonByMonth = getAvgPricePerGallonByMonth(props.refuels);
 
   return (
-    <BaseDashboardCard title="Average Price Per Gallon" value={"$" +avgPricePerGallon.toFixed(2)}>
+    <BaseDashboardCard title="Average Price Per Gallon" value={"$" + avgPricePerGallon.toFixed(2)}>
       <BarChart width={300} height={300} data={avgPricePerGallonByMonth}>
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="month" />
@@ -64,13 +64,12 @@ function getAvgPricePerGallonByMonth(refuels: Refuel[]): { month: string, priceP
     const fillups = fillupsByMonth[key];
     const month = key.split("/")[0];
     const year = key.split("/")[1];
-    const date = new Date(parseInt(year), parseInt(month)-1);
 
     avgPricePerGallonByMonth.push({
-      month: date.toLocaleString('default', { month: 'short' }) + " " + year,
+      month: month + "/" + year,
       pricePerGallon: pricePerGallon / fillups
     });
   });
 
-  return avgPricePerGallonByMonth;
+  return avgPricePerGallonByMonth.reverse();
 }
