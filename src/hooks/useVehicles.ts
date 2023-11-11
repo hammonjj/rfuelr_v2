@@ -22,7 +22,7 @@ export default function useVehicles() {
     async function getVehicles(): Promise<Vehicle[]> {
         const { data, error } = await supabase
             .from('Refuel.Vehicles')
-            .select('make, model, id, odometer')
+            .select('make, model, id, odometer, is_primary')
             .eq('user', user!.id);
     
         if(error) {

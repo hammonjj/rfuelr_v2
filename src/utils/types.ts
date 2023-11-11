@@ -29,6 +29,7 @@ export interface Vehicle {
   model: string;
   id: string | undefined;
   odometer: number;
+  is_primary: boolean;
 }
 
 export interface DashboardCardProps {

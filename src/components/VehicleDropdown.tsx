@@ -22,6 +22,10 @@ export default function VehicleDropdown(props: VehicleDropdownProps) {
       setVehicle(vehicles[0].id!);
       props.setVehicle(vehicles[0]);
     }
+    else if(vehicles?.filter((vehicle) => vehicle.is_primary === true).length! > 0 && vehicle === '') {
+      setVehicle(vehicles?.filter((vehicle) => vehicle.is_primary === true)[0].id!);
+      props.setVehicle(vehicles?.filter((vehicle) => vehicle.is_primary === true)[0]!);
+    }
   }, [vehicles]);
 
   return (
