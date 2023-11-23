@@ -24,6 +24,7 @@ export default function VehicleAccordion() {
       model: model,
       id: undefined,
       odometer: odometer,
+      is_primary: false
     });
 
     setAddVehicleModalOpen(false);
