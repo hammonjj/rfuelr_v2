@@ -31,7 +31,8 @@ export default function EditVehicleDialog(props: EditVehicleDialogProps) {
       id: props.vehicle!.id,
       make: make,
       model: model,
-      odometer: odometer
+      odometer: odometer,
+      is_primary: false
     }
 
     try {
