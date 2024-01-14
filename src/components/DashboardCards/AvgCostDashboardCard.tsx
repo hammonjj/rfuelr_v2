@@ -39,11 +39,11 @@ export default function AvgCostDashboardCard(props: DashboardCardProps) {
             dataKey="cost" 
             fill="#8884d8" 
             onMouseEnter={e => {
-              console.log("e: ", e);
+              //console.log("e: ", e);
               }
             }
             onMouseLeave={() => {
-              console.log("Leaving")
+              //console.log("Leaving")
             }}
             />
         </BarChart>
